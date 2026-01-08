@@ -56,7 +56,8 @@ function ListOfOrchid() {
                     </Col>
                 ))}
             </Row>
-
+            
+        {/* DATLT - Modal for displaying orchid details */}
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>
