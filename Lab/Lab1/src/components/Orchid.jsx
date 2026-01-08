@@ -1,38 +1,41 @@
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
 
-function Orchid() {
-    const orchid = {
-        id: "1",
-        orchidName: "Ceasar 4N",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta lobortis ex. Morbi cursus consectetur diam, non lobortis massa gravida eu.",
-        category: "Dendrobium",
-        isSpecial: true,
-        image: "/images/orchid1.png"
-    };
+function Orchid({ show, handleClose, orchid }) {
+    if (!orchid) return null;
 
     return (
-        <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={orchid.image} />
-            <Card.Body>
-                <Card.Title>{orchid.id}. {orchid.orchidName}</Card.Title>
+        <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>{orchid.orchidName}</Modal.Title>
+            </Modal.Header>
 
-                <Card.Text>
-                    {orchid.description}
-                    <br />
+            <Modal.Body>
+                <img
+                    src={orchid.image}
+                    alt={orchid.orchidName}
+                    style={{ width: "100%", marginBottom: "15px" }}
+                />
+
+                <p>{orchid.description}</p>
+
+                <p>
                     <strong>Category:</strong> {orchid.category}
-                    <br />
-                    {orchid.isSpecial && (
-                        <span style={{ color: "red", fontWeight: "bold" }}>
-              Special Orchid
-            </span>
-                    )}
-                </Card.Text>
+                </p>
 
-                <Button variant="primary">View detail</Button>
-            </Card.Body>
-        </Card>
+                {orchid.isSpecial && (
+                    <p style={{ color: "red", fontWeight: "bold" }}>
+                        Special Orchid
+                    </p>
+                )}
+            </Modal.Body>
+
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
     );
 }
 
