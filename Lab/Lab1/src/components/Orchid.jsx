@@ -1,42 +1,35 @@
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import Card from "react-bootstrap/Card";
 
-function Orchid({ show, handleClose, orchid }) {
-    if (!orchid) return null;
-
+function Orchid({ orchid, handleShow }) {
     return (
-        <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-                <Modal.Title>{orchid.orchidName}</Modal.Title>
-            </Modal.Header>
+        <Card className="h-100">
+        <Card.Img variant="top" src={orchid.image} />
+        <Card.Body className="d-flex flex-column">
+            <Card.Title>{orchid.id}. {orchid.orchidName}</Card.Title>
 
-            <Modal.Body>
-                <img
-                    src={orchid.image}
-                    alt={orchid.orchidName}
-                    style={{ width: "100%", marginBottom: "15px" }}
-                />
-
-                <p>{orchid.description}</p>
-
-                <p>
-                    <strong>Category:</strong> {orchid.category}
-                </p>
-
+            <Card.Text className="flex-grow-1">
+                {orchid.description}
+                <br />
+                <strong>Category:</strong> {orchid.category}
+                <br />
                 {orchid.isSpecial && (
-                    <p style={{ color: "red", fontWeight: "bold" }}>
+                    <span style={{ color: "red", fontWeight: "bold" }}>
                         Special Orchid
-                    </p>
+                    </span>
                 )}
-            </Modal.Body>
+            </Card.Text>
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-            </Modal.Footer>
-        </Modal>
+            <Button
+                variant="primary"
+                onClick={() => handleShow(orchid)}
+            >
+                View detail
+            </Button>
+        </Card.Body>
+    </Card>
     );
+
 }
 
 export default Orchid;

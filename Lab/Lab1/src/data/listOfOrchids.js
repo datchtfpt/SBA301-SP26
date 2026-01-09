@@ -6,7 +6,7 @@ export const OrchidsData =
             "description": "The most beautiful orchid in the word",
             "category": "Dendrobium",
             "isSpecial": true,
-            "image": "images/orchid1.png"
+            "image": "/images/orchid1.png"
         },
         {
             "id": "2",
@@ -14,7 +14,7 @@ export const OrchidsData =
             "description": "The top 2 beautiful orchids in the word",
             "category": "Dendrobium",
             "isSpecial": true,
-            "image": "images/orchid2.png"
+            "image": "/images/orchid2.png"
         },
         {
             "id": "3",
@@ -22,7 +22,7 @@ export const OrchidsData =
             "description": "The top 3 beautiful orchids in the word",
             "category": "Dendrobium",
             "isSpecial": true,
-            "image": "images/orchid3.png"
+            "image": "/images/orchid3.png"
         },
         {
             "id": "4",
@@ -30,20 +30,20 @@ export const OrchidsData =
             "description": "The top 4 beautiful orchids in the word",
             "category": "Dendrobium",
             "isSpecial": false,
-            "image": "images/orchid4.png"
+            "image": "/images/orchid2.png"
         },
         {
             "id": "5",
             "orchidName": "Busuangense",
             "description": "The top 5 beautiful orchids in the word",
             "isSpecial": true,
-            "image": "images/orchid5.png"
+            "image": "/images/orchid3.png"
         },
         {
             "id": "6",
             "orchidName": "Pink Moth",
             "description": "The top 6 beautiful orchids in the word",
-            "image": "images/orchid6.png",
+            "image": "/images/orchid2.png",
             "category": "Oncidium"
         },
         {
@@ -52,7 +52,7 @@ export const OrchidsData =
             "description": "The top 7 beautiful orchids in the word",
             "category": "Dendrobium",
             "isSpecial": true,
-            "image": "images/orchid7.png"
+            "image": "/images/orchid3.png"
         },
         {
             "id": "8",
@@ -60,6 +60,6 @@ export const OrchidsData =
             "description": "The top 8 beautiful orchids in the word",
             "category": "Dendrobium",
             "isSpecial": true,
-            "image": "images/orchid8.png"
+            "image": "/images/orchid2.png"
         }
     ]

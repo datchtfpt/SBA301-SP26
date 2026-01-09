@@ -3,7 +3,7 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 
 function Footer( {avatar,name,contact} ) {   
      return (
-        <footer>
+        <footer className='footer'>
              <Container fluid>
             <Row className="align-items-center">
                 <Col xs={2}>
@@ -13,7 +13,7 @@ function Footer( {avatar,name,contact} ) {
                     <h5>Tác giả: &copy; {name} </h5>
                     <small>All rights reserved.</small>
                 </Col>
-                <Col xs={2}>
+                <Col xs={1}>
                     <a href={'mailto:${contact}'}> {contact} </a>    
                 </Col>
             </Row>

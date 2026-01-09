@@ -3,14 +3,14 @@ import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
 import ListOfOrchid from './components/ListOfOrchid.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import { OrchidsData } from './data/listOfOrchids.js'
 function App() {
 
     return (
         <>
            <Header />
          
-          <ListOfOrchid/>
+          <ListOfOrchid orchids={OrchidsData}/>
             <Footer avatar="/images/image.png" name="Le Thanh Dat" contact="lethanhdat20072005@gmail.com"/>
 
         

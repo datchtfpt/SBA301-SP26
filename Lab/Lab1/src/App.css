@@ -45,6 +45,14 @@
   padding-top: 80px;   /* chiều cao navbar */
   min-height: calc(100vh - 160px);
 }
+.footer {
+  background-color: #f0f0f0; /* màu xám nhạt */
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
 
 
 
