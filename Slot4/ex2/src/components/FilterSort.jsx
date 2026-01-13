@@ -1,6 +1,9 @@
 // FilterSort.jsx to filter orchids by category and sort them by price or name
+
 import React from "react";
+import { Button } from "react-bootstrap";
 import {Form, Row, Col} from "react-bootstrap";
+import { useState } from "react";
 
 function FileterSort({categories, onFilterChange, onSortChange}) {
     
