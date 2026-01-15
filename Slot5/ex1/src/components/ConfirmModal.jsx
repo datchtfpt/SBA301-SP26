@@ -1,6 +1,6 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/esm/Modal";
+import Button from "react-bootstrap/esm/Button";
 
 function ConfirmModal({ show, handleClose, title, body, onConfirm }) {
     return (

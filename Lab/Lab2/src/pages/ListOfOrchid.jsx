@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Row, Col } from "react-bootstrap";
 import { OrchidsData } from "../data/listOfOrchid.js";
-import FileterSort from "./FilterSort.jsx";
+import FileterSort from '../components/FilterSort.jsx';
 import React from "react";
 import { Link } from "react-router-dom";
 

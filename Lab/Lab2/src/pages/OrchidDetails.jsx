@@ -32,7 +32,7 @@ function OrchidDetails() {
           )}
         </Card.Text>
 
-        <Button as={Link} to="/" variant="secondary">
+        <Button as={Link} to="/orchids" variant="secondary">
           Back to list
         </Button>
       </Card.Body>
