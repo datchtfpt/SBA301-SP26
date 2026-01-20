@@ -16,7 +16,7 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route element={<MainLayout onSearchChange={setSearchTerm} />}>
                     <Route path="/orchids" element={<ListOfOrchid searchTerm={searchTerm} />} />
                     <Route path="/orchids/:id" element={<OrchidDetails />} />

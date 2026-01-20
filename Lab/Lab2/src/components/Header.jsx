@@ -4,15 +4,24 @@ import React from "react";
 import SearchSort from "./SearchSort.jsx";
 import CarouselBanner from "./CarouselBanner.jsx";
 import { bannersData } from "../data/banners.js";
+import { useContext } from "react";
+import { AuthContext } from "../hooks/AuthContext.jsx";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 function Header({ onSearchChange }) {
+  const { state, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       <CarouselBanner banners={bannersData} />
 
       <Navbar bg="primary" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/orchids" className="fw-bold">
             HDPE STORE
           </Navbar.Brand>
 
@@ -24,6 +33,18 @@ function Header({ onSearchChange }) {
               <Nav.Link as={Link} to="/about">About</Nav.Link>
               <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
             </Nav>
+
+            {state.isAuthenticated && (
+              <Button
+                variant="outline-light"
+                onClick={() => {
+                  dispatch({ type: "LOGOUT" });
+                  navigate("/login");
+                }}
+              >
+                Logout
+              </Button>
+            )}
 
             <SearchSort onSearchChange={onSearchChange} />
           </Navbar.Collapse>
