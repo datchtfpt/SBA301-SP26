@@ -46,8 +46,6 @@ function ListOfOrchid({ searchTerm }) {
     }
 
 
-
-
     return (
         <>
             <FileterSort categories={[...new Set(OrchidsData.map(orchid => orchid.category))]} onFilterChange={handleFilterChange} onSortChange={handleSortChange} />

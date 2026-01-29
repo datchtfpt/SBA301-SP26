@@ -1,0 +1,61 @@
+#root {
+  margin: 0;
+  padding: 0;
+}
+
+/* Title chung */
+h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #212529;
+}
+
+/* Card Orchid */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Button */
+.btn-primary {
+  background-color: #0d6efd;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+}
+
+/* Form */
+.form-control,
+.form-select {
+  border-radius: 10px;
+}
+
+.contact-page {
+  padding: 60px 15px;
+}
+
+.contact-card {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 12px;
+}
+
+.search-box {
+  max-width: 260px;
+}
+
+

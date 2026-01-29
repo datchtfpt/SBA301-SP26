@@ -1,0 +1,85 @@
+{
+    "orchids": [
+        {
+            "id": 2,
+            "orchidName": "Mini Yaya",
+            "description": "The top 2 beautiful orchids in the word",
+            "category": "Dendrobium",
+            "isSpecial": true,
+            "price": 95,
+            "image": "/images/orchid2.png"
+        },
+        {
+            "id": 3,
+            "orchidName": "Crystallinum",
+            "description": "The top 3 beautiful orchids in the word",
+            "category": "Dendrobium",
+            "isSpecial": true,
+            "price": 150,
+            "image": "/images/orchid3.png"
+        },
+        {
+            "id": 4,
+            "orchidName": "Damari",
+            "description": "The top 4 beautiful orchids in the word",
+            "category": "Dendrobium",
+            "isSpecial": false,
+            "price": 80,
+            "image": "/images/orchid2.png"
+        },
+        {
+            "id": 5,
+            "orchidName": "Busuangense",
+            "description": "The top 5 beautiful orchids in the word",
+            "category": "Dendrobium",
+            "isSpecial": true,
+            "price": 170,
+            "image": "/images/orchid3.png"
+        },
+        {
+            "id": 6,
+            "orchidName": "Pink Moth",
+            "description": "The top 6 beautiful orchids in the word",
+            "category": "Oncidium",
+            "isSpecial": false,
+            "price": 60,
+            "image": "/images/orchid2.png"
+        },
+        {
+            "id": 7,
+            "orchidName": "Alba",
+            "description": "The top 7 beautiful orchids in the word",
+            "category": "Dendrobium",
+            "isSpecial": true,
+            "price": 200,
+            "image": "/images/orchid3.png"
+        },
+        {
+            "orchidName": "Ceasar Secret",
+            "description": "The most beautiful orchid in the best word but not as you, honey",
+            "category": "Oncidium",
+            "price": 2032,
+            "image": "/images/orchid1.png",
+            "isSpecial": false,
+            "id": 8
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "123456",
+            "name": "Le Thanh Dat",
+            "email": "lethanhdat20072005@gmail.com",
+            "role": "ADMIN"
+        },
+        {
+            "id": 2,
+            "username": "user",
+            "password": "123",
+            "name": "Le Thanh Dat",
+            "email": "lethanhdat20072005@gmail.com",
+            "role": "USER"
+        }
+    ]
+}

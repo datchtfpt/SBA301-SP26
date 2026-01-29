@@ -9,9 +9,6 @@ import { AuthContext } from "../hooks/AuthContext.jsx";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function Header({ onSearchChange }) {
   const { state, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
