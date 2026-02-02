@@ -5,12 +5,15 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+const categoriesUrl = (import.meta.env.VITE_API_URL || "").replace("/orchids", "/categories");
+
 export default function EditOrchid() {
   const { id } = useParams();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_API_URL;
 
   const [api, setApi] = useState({});
+  const [categories, setCategories] = useState([]);
 
   const {
     control,
@@ -32,7 +35,10 @@ export default function EditOrchid() {
         return;
       }
       setApi(orchidData);
-      reset(orchidData);
+      reset({
+        ...orchidData,
+        categoryID: orchidData.category?.categoryID ?? "",
+      });
     } catch (err) {
       toast.error("Failed to load orchid data");
       navigate("/");
@@ -43,13 +49,26 @@ export default function EditOrchid() {
     fetchOrchid();
   }, [id]);
 
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await axios.get(categoriesUrl, { timeout: 10000 });
+        if (Array.isArray(res.data)) setCategories(res.data);
+      } catch (e) {
+        console.error("Error fetching categories:", e);
+      }
+    };
+    load();
+  }, []);
+
   // ================= SUBMIT =================
   const onSubmit = async (data) => {
     try {
-      // Đảm bảo boolean không null
       data.isNatural = !!data.isNatural;
       data.isAttractive = !!data.isAttractive;
-      
+      data.category = { categoryID: Number(data.categoryID) };
+      delete data.categoryID;
+
       await axios.put(`${baseUrl}/${id}`, data, {
         headers: { "Content-Type": "application/json" }
       });
@@ -106,14 +125,21 @@ export default function EditOrchid() {
             <Form.Group className="mb-3">
               <Form.Label>Orchid Category</Form.Label>
               <Controller
-                name="orchidCategory"
+                name="categoryID"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <Form.Control {...field} type="text" />
+                  <Form.Select {...field}>
+                    <option value="">-- Choose category --</option>
+                    {categories.map((c) => (
+                      <option key={c.categoryID} value={c.categoryID}>
+                        {c.categoryName}
+                      </option>
+                    ))}
+                  </Form.Select>
                 )}
               />
-              {errors.orchidCategory && (
+              {errors.categoryID && (
                 <p className="text-warning">Category is required</p>
               )}
             </Form.Group>

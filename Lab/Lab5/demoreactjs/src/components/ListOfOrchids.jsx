@@ -8,11 +8,12 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 
+const categoriesUrl = (import.meta.env.VITE_API_URL || "").replace("/orchids", "/categories");
+
 export default function ListOfOrchids() {
   const baseUrl = import.meta.env.VITE_API_URL;
-  console.log("API URL =", baseUrl);
-
   const [api, setAPI] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +34,17 @@ export default function ListOfOrchids() {
 
   useEffect(() => {
     fetchData();
+    fetchCategories();
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(categoriesUrl, { timeout: 10000 });
+      if (Array.isArray(res.data)) setCategories(res.data);
+    } catch (e) {
+      console.error("Error fetching categories:", e);
+    }
+  };
 
   // ================= FETCH =================
   const fetchData = async () => {
@@ -102,9 +113,10 @@ export default function ListOfOrchids() {
   // ================= ADD =================
   const onSubmit = async (data) => {
     try {
-      // ⚠️ đảm bảo boolean KHÔNG NULL
       data.isNatural = !!data.isNatural;
       data.isAttractive = !!data.isAttractive;
+      data.category = { categoryID: Number(data.categoryID) };
+      delete data.categoryID;
 
       await axios.post(baseUrl, data, {
         timeout: 10000,
@@ -160,6 +172,7 @@ export default function ListOfOrchids() {
             <tr>
               <th>Image</th>
               <th>Orchid Name</th>
+              <th>Category</th>
               <th>Origin</th>
               <th>Action</th>
             </tr>
@@ -172,6 +185,7 @@ export default function ListOfOrchids() {
                 <Image src={a.orchidURL} width={40} rounded />
               </td>
               <td>{a.orchidName}</td>
+              <td>{a.category?.categoryName ?? "-"}</td>
               <td>
                 {a.isNatural ? (
                   <span className="badge bg-success">Natural</span>
@@ -233,10 +247,15 @@ export default function ListOfOrchids() {
 
             <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>
-              <Form.Control
-                {...register("orchidCategory", { required: true })}
-              />
-              {errors.orchidCategory && (
+              <Form.Select {...register("categoryID", { required: true })}>
+                <option value="">-- Choose category --</option>
+                {categories.map((c) => (
+                  <option key={c.categoryID} value={c.categoryID}>
+                    {c.categoryName}
+                  </option>
+                ))}
+              </Form.Select>
+              {errors.categoryID && (
                 <p className="text-danger">Category is required</p>
               )}
             </Form.Group>

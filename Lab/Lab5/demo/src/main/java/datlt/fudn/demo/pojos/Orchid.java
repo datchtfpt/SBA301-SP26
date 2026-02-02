@@ -1,7 +1,6 @@
 package datlt.fudn.demo.pojos;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -25,8 +24,9 @@ public class Orchid implements Serializable {
     @Column(name = "orchid_description")
     private String orchidDescription;
 
-    @Column(name = "orchid_category")
-    private String orchidCategory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @Column(name = "is_attractive", columnDefinition = "bit default 0")
     private boolean isAttractive;
@@ -39,11 +39,11 @@ public class Orchid implements Serializable {
     }
 
     public Orchid(String orchidName, boolean isNatural, String orchidDescription,
-                  String orchidCategory, boolean isAttractive, String orchidURL) {
+                  Category category, boolean isAttractive, String orchidURL) {
         this.orchidName = orchidName;
         this.isNatural = isNatural;
         this.orchidDescription = orchidDescription;
-        this.orchidCategory = orchidCategory;
+        this.category = category;
         this.isAttractive = isAttractive;
         this.orchidURL = orchidURL;
     }
@@ -80,12 +80,12 @@ public class Orchid implements Serializable {
         this.orchidDescription = orchidDescription;
     }
 
-    public String getOrchidCategory() {
-        return orchidCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setOrchidCategory(String orchidCategory) {
-        this.orchidCategory = orchidCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public boolean isAttractive() {
