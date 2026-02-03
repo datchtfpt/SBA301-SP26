@@ -1,0 +1,9 @@
+.layout-footer {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  color: #78909c;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,101 @@
+@startuml
+interface datlt.fudn.demo.repositories.IOrchidRepository {
+}
+class datlt.fudn.demo.controllers.OrchidController {
+- IOrchidService service
++ ResponseEntity<List<Orchid>> fetchAll()
++ ResponseEntity<Optional<Orchid>> getOrchidByID(int)
++ Orchid saveOrchid(Orchid)
++ ResponseEntity<Orchid> updateOrchid(int,Orchid)
++ ResponseEntity<String> deleteOrchid(int)
+}
+
+
+class datlt.fudn.demo.services.OrchidService {
+- IOrchidRepository repository
+- ICategoryRepository categoryRepository
++ List<Orchid> getAllOrchids()
++ Orchid insertOrchid(Orchid)
++ Orchid updateOrchid(int,Orchid)
+- void resolveCategory(Orchid)
++ void deleteOrchid(int)
++ Optional<Orchid> getOrchidByID(int)
+}
+
+
+interface datlt.fudn.demo.services.ICategoryService {
+~ List<Category> getAllCategories()
+~ Optional<Category> getCategoryByID(int)
+}
+
+class datlt.fudn.demo.services.CategoryService {
+- ICategoryRepository repository
++ List<Category> getAllCategories()
++ Optional<Category> getCategoryByID(int)
+}
+
+
+interface datlt.fudn.demo.repositories.ICategoryRepository {
+}
+class datlt.fudn.demo.controllers.CategoryController {
+- ICategoryService service
++ ResponseEntity<List<Category>> fetchAll()
+}
+
+
+class datlt.fudn.demo.pojos.Category {
+- int categoryID
+- String categoryName
++ int getCategoryID()
++ void setCategoryID(int)
++ String getCategoryName()
++ void setCategoryName(String)
+}
+
+
+interface datlt.fudn.demo.services.IOrchidService {
++ List<Orchid> getAllOrchids()
++ Orchid insertOrchid(Orchid)
++ Orchid updateOrchid(int,Orchid)
++ void deleteOrchid(int)
++ Optional<Orchid> getOrchidByID(int)
+}
+
+class datlt.fudn.demo.DemoApplication {
++ {static} void main(String[])
+}
+
+class datlt.fudn.demo.pojos.Orchid {
+- int orchidID
+- String orchidName
+- boolean isNatural
+- String orchidDescription
+- Category category
+- boolean isAttractive
+- String orchidURL
++ int getOrchidID()
++ void setOrchidID(int)
++ String getOrchidName()
++ void setOrchidName(String)
++ boolean isNatural()
++ void setNatural(boolean)
++ String getOrchidDescription()
++ void setOrchidDescription(String)
++ Category getCategory()
++ void setCategory(Category)
++ boolean isAttractive()
++ void setAttractive(boolean)
++ String getOrchidURL()
++ void setOrchidURL(String)
+}
+
+
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- datlt.fudn.demo.repositories.IOrchidRepository
+datlt.fudn.demo.services.IOrchidService <|.. datlt.fudn.demo.services.OrchidService
+datlt.fudn.demo.services.ICategoryService <|.. datlt.fudn.demo.services.CategoryService
+org.springframework.data.jpa.repository.JpaRepository <|-- datlt.fudn.demo.repositories.ICategoryRepository
+java.io.Serializable <|.. datlt.fudn.demo.pojos.Category
+java.io.Serializable <|.. datlt.fudn.demo.pojos.Orchid
+@enduml

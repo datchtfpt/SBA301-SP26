@@ -1,0 +1,18 @@
+.layout-sidebar {
+  width: 240px;
+  padding: 20px;
+  background: #0f3460;
+  color: #b0bec5;
+  font-size: 0.9rem;
+}
+
+.sidebar-title {
+  font-weight: 600;
+  color: #4fc3f7;
+  margin-bottom: 12px;
+}
+
+.sidebar-text {
+  margin: 0;
+  line-height: 1.5;
+}

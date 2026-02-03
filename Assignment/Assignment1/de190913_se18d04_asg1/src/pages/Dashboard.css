@@ -1,0 +1,38 @@
+.dashboard h1 {
+  margin: 0 0 8px 0;
+  color: #1a1a2e;
+  font-size: 1.75rem;
+}
+
+.dashboard-desc {
+  color: #546e7a;
+  margin-bottom: 24px;
+}
+
+.dashboard-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 160px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f3460;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #78909c;
+}

@@ -1,0 +1,42 @@
+.layout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 20px;
+  background: #1a1a2e;
+  color: #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-logo .logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4fc3f7;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  color: #b0bec5;
+}
+
+.btn-logout {
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  border: 1px solid #37474f;
+  border-radius: 6px;
+  background: transparent;
+  color: #90a4ae;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background: #263238;
+  color: #fff;
+}

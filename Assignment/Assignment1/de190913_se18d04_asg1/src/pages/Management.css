@@ -1,0 +1,171 @@
+.management h1 {
+  margin: 0 0 20px 0;
+  color: #1a1a2e;
+  font-size: 1.75rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1px solid #b0bec5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4fc3f7;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #0f3460;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #16213e;
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  border: 1px solid #b0bec5;
+  border-radius: 8px;
+  background: #fff;
+  color: #546e7a;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+
+.table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #37474f;
+  font-size: 0.9rem;
+}
+
+.data-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  margin-right: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-edit {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.btn-edit:hover {
+  background: #bbdefb;
+}
+
+.btn-delete {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.btn-delete:hover {
+  background: #ffcdd2;
+}
+
+/* Form trong modal */
+.management .form-group {
+  margin-bottom: 16px;
+}
+
+.management .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #37474f;
+}
+
+.management .form-group input,
+.management .form-group select,
+.management .form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #b0bec5;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.management .form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tag-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tag-check input {
+  width: auto;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: #78909c;
+  margin: -8px 0 12px 0;
+}
