@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface INewArticleService {
+public interface INewsArticleService {
 
     public NewsArticle create(NewsArticle article);
 
     public NewsArticle update(Integer id, NewsArticle article);
-    
+
     public NewsArticle getArticle(Integer id);
 
     public List<NewsArticle> getAllArticles();

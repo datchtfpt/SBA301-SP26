@@ -1,0 +1,45 @@
+@startuml
+class fu.se.backend.pojos.NewsArticle {
+- Integer newsArticleID
+- String newsTitle
+- String headline
+- Date createdDate
+- String newsContent
+- String newsSource
+- Category category
+- Integer NewsStatus
+- Account account
+- Account account2
+- Date modifiedDate
+}
+
+class fu.se.backend.pojos.NewsTag {
+- Integer newsArticleID
+- Set<Tag> tags
+}
+
+class fu.se.backend.pojos.Category {
+- Integer categoryId
+- String categoryName
+- String categoryDescription
+- Category parentCategory
+- List<Category> childCategories
+- Integer isActive
+}
+
+class fu.se.backend.pojos.Account {
+- Integer accountId
+- String accountName
+- String accountEmail
+- Integer AccountRole
+- String accountPassword
+}
+
+class fu.se.backend.pojos.Tag {
+- Integer tagID
+- String tagName
+- String note
+- Set<NewsTag> newsTags
+}
+
+@enduml

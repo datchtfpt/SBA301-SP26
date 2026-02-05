@@ -1,11 +1,15 @@
-import { useState, useMemo } from 'react';
-import { Form, Table, Button, Card } from 'react-bootstrap';
-import { mockNews, mockCategories, mockTags } from '../data/mockData';
+import { useState, useEffect, useMemo } from 'react';
+import { Form, Table, Button, Card, Alert } from 'react-bootstrap';
+import { newsAPI, categoryAPI, tagAPI } from '../services/api';
 import Modal from '../components/common/Modal';
 import ConfirmDialog from '../components/common/ConfirmDialog';
 
 export default function NewsManagement() {
-  const [list, setList] = useState([...mockNews]);
+  const [list, setList] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
@@ -19,21 +23,48 @@ export default function NewsManagement() {
     NewsSource: '',
     CategoryID: '',
     NewsStatus: 1,
-    tagIds: [],
+    tags: [],
   });
+
+  // Load data on component mount
+  useEffect(() => {
+    // Set default role for demo
+    localStorage.setItem('userRole', '2');
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      const [newsData, categoriesData, tagsData] = await Promise.all([
+        newsAPI.getAll(),
+        categoryAPI.getAll(),
+        tagAPI.getAll()
+      ]);
+      setList(newsData);
+      setCategories(categoriesData);
+      setTags(tagsData);
+      setError('');
+    } catch (err) {
+      setError('Failed to load data. Please try again.');
+      console.error('Load data error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredList = useMemo(() => {
     if (!search.trim()) return list;
     const q = search.toLowerCase();
     return list.filter(
       (n) =>
-        n.NewsTitle.toLowerCase().includes(q) ||
-        (n.Headline && n.Headline.toLowerCase().includes(q)) ||
-        (n.NewsContent && n.NewsContent.toLowerCase().includes(q))
+        n.newsTitle?.toLowerCase().includes(q) ||
+        (n.headline && n.headline.toLowerCase().includes(q)) ||
+        (n.newsContent && n.newsContent.toLowerCase().includes(q))
     );
   }, [list, search]);
 
-  const getCategoryName = (id) => mockCategories.find((c) => c.CategoryID === id)?.CategoryName || '-';
+  const getCategoryName = (id) => categories.find((c) => c.categoryId === id)?.categoryName || '-';
 
   const openCreate = () => {
     setEditingItem(null);
@@ -42,9 +73,9 @@ export default function NewsManagement() {
       Headline: '',
       NewsContent: '',
       NewsSource: 'FU News',
-      CategoryID: mockCategories[0]?.CategoryID || '',
+      CategoryID: categories[0]?.categoryId || '',
       NewsStatus: 1,
-      tagIds: [],
+      tags: [],
     });
     setModalOpen(true);
   };
@@ -52,52 +83,55 @@ export default function NewsManagement() {
   const openEdit = (item) => {
     setEditingItem(item);
     setForm({
-      NewsTitle: item.NewsTitle,
-      Headline: item.Headline || '',
-      NewsContent: item.NewsContent || '',
-      NewsSource: item.NewsSource || '',
-      CategoryID: item.CategoryID,
-      NewsStatus: item.NewsStatus,
-      tagIds: [...(item.tagIds || [])],
+      NewsTitle: item.newsTitle,
+      Headline: item.headline || '',
+      NewsContent: item.newsContent || '',
+      NewsSource: item.newsSource || '',
+      CategoryID: item.category?.categoryId || '',
+      NewsStatus: item.newsStatus,
+      tags: item.tags?.map(tag => tag.tagID) || [],
     });
     setModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.NewsTitle.trim()) return;
-    const payload = {
-      ...form,
-      CategoryID: +form.CategoryID || list[0]?.CategoryID,
-    };
-    if (editingItem) {
-      setList((prev) =>
-        prev.map((n) =>
-          n.NewsArticleID === editingItem.NewsArticleID
-            ? { ...n, ...payload, tagIds: form.tagIds }
-            : n
-        )
-      );
-    } else {
-      const newId = Math.max(0, ...list.map((n) => n.NewsArticleID)) + 1;
-      setList((prev) => [
-        ...prev,
-        {
-          NewsArticleID: newId,
-          CreatedDate: new Date().toISOString().slice(0, 19),
-          CreatedByID: 1,
-          ...payload,
-        },
-      ]);
+    
+    try {
+      const payload = {
+        newsTitle: form.NewsTitle,
+        headline: form.Headline,
+        newsContent: form.NewsContent,
+        newsSource: form.NewsSource,
+        category: { categoryId: +form.CategoryID },
+        newsStatus: form.NewsStatus,
+        tags: tags.filter(tag => form.tags.includes(tag.tagID)),
+        createdBy: { accountId: 1 }, // Default user, should come from auth context
+        updatedBy: { accountId: 1 },
+        createdDate: new Date(),
+        modifiedDate: new Date(),
+      };
+
+      if (editingItem) {
+        await newsAPI.update(editingItem.newsArticleID, payload);
+      } else {
+        await newsAPI.create(payload);
+      }
+      
+      await loadData(); // Reload data
+      setModalOpen(false);
+    } catch (err) {
+      setError('Failed to save news article. Please try again.');
+      console.error('Save error:', err);
     }
-    setModalOpen(false);
   };
 
   const toggleTag = (tagId) => {
     setForm((f) => ({
       ...f,
-      tagIds: f.tagIds.includes(tagId)
-        ? f.tagIds.filter((id) => id !== tagId)
-        : [...f.tagIds, tagId],
+      tags: f.tags.includes(tagId)
+        ? f.tags.filter((id) => id !== tagId)
+        : [...f.tags, tagId],
     }));
   };
 
@@ -106,15 +140,30 @@ export default function NewsManagement() {
     setConfirmOpen(true);
   };
 
-  const handleDelete = () => {
-    if (deleteId) setList((prev) => prev.filter((n) => n.NewsArticleID !== deleteId));
-    setConfirmOpen(false);
-    setDeleteId(null);
+  const handleDelete = async () => {
+    try {
+      if (deleteId) {
+        await newsAPI.delete(deleteId);
+        await loadData(); // Reload data
+      }
+      setConfirmOpen(false);
+      setDeleteId(null);
+    } catch (err) {
+      setError('Failed to delete news article. Please try again.');
+      console.error('Delete error:', err);
+    }
   };
+
+  if (loading) {
+    return <div className="text-center p-4">Loading...</div>;
+  }
 
   return (
     <div>
       <h1 className="mb-4">News Article Management</h1>
+      
+      {error && <Alert variant="danger" dismissible onClose={() => setError('')}>{error}</Alert>}
+      
       <Card className="mb-4">
         <Card.Body>
           <div className="d-flex gap-2 mb-3 flex-wrap">
@@ -142,12 +191,12 @@ export default function NewsManagement() {
             </thead>
             <tbody>
               {filteredList.map((n) => (
-                <tr key={n.NewsArticleID}>
-                  <td>{n.NewsArticleID}</td>
-                  <td>{n.NewsTitle}</td>
-                  <td>{n.Headline || '-'}</td>
-                  <td>{getCategoryName(n.CategoryID)}</td>
-                  <td>{n.NewsStatus === 1 ? 'Active' : 'Inactive'}</td>
+                <tr key={n.newsArticleID}>
+                  <td>{n.newsArticleID}</td>
+                  <td>{n.newsTitle}</td>
+                  <td>{n.headline || '-'}</td>
+                  <td>{getCategoryName(n.category?.categoryId)}</td>
+                  <td>{n.newsStatus === 1 ? 'Active' : 'Inactive'}</td>
                   <td>
                     <Button
                       variant="outline-primary"
@@ -160,7 +209,7 @@ export default function NewsManagement() {
                     <Button
                       variant="outline-danger"
                       size="sm"
-                      onClick={() => openDelete(n.NewsArticleID)}
+                      onClick={() => openDelete(n.newsArticleID)}
                     >
                       Xóa
                     </Button>
@@ -220,9 +269,9 @@ export default function NewsManagement() {
             value={form.CategoryID}
             onChange={(e) => setForm((f) => ({ ...f, CategoryID: e.target.value }))}
           >
-            {mockCategories.map((c) => (
-              <option key={c.CategoryID} value={c.CategoryID}>
-                {c.CategoryName}
+            {categories.map((c) => (
+              <option key={c.categoryId} value={c.categoryId}>
+                {c.categoryName}
               </option>
             ))}
           </Form.Select>
@@ -230,14 +279,14 @@ export default function NewsManagement() {
         <Form.Group className="mb-3">
           <Form.Label>Tags</Form.Label>
           <div className="d-flex flex-wrap gap-3">
-            {mockTags.map((t) => (
+            {tags.map((t) => (
               <Form.Check
-                key={t.TagID}
+                key={t.tagID}
                 type="checkbox"
-                id={`tag-${t.TagID}`}
-                label={t.TagName}
-                checked={form.tagIds.includes(t.TagID)}
-                onChange={() => toggleTag(t.TagID)}
+                id={`tag-${t.tagID}`}
+                label={t.tagName}
+                checked={form.tags.includes(t.tagID)}
+                onChange={() => toggleTag(t.tagID)}
               />
             ))}
           </div>
