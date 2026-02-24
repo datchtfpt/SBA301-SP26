@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fu.se.demo_hibernate.controller.StudentController"
+            prefWidth="900"
+            prefHeight="600"
+            style="-fx-background: linear-gradient(to bottom, #e6f3ff, #f0f8ff);">
+
+    <!-- ================= TITLE ================= -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15;">
+            <Label text="STUDENT MANAGEMENT SYSTEM"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c5aa0;"/>
+            <Separator style="-fx-background-color: #4a90e2;"/>
+        </VBox>
+    </top>
+
+    <!-- ================= TABLE ================= -->
+    <center>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <TableView fx:id="studentTable" prefHeight="350"
+                       style="-fx-background-color: white; -fx-border-color: #4a90e2; -fx-border-width: 1; -fx-border-radius: 5;">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="180"/>
+                    <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="150"/>
+                    <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="150"/>
+                    <TableColumn fx:id="marksColumn" text="Marks" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- ================= FORM ================= -->
+    <bottom>
+        <VBox spacing="15" style="-fx-padding: 20;">
+
+            <TitledPane text="Student Information" collapsible="false"
+                        style="-fx-background-color: white; -fx-border-color: #4a90e2; -fx-border-width: 1; -fx-border-radius: 5;">
+
+                <GridPane hgap="15" vgap="12" style="-fx-padding: 15;">
+
+                    <!-- Email -->
+                    <Label text="Email:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #2c5aa0; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtEmail"
+                               promptText="Enter email"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               style="-fx-background-color: #f0f8ff; -fx-border-color: #4a90e2; -fx-border-radius: 3;"/>
+
+                    <!-- Password -->
+                    <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #2c5aa0; -fx-font-weight: bold;"/>
+                    <PasswordField fx:id="txtPassword"
+                                   promptText="Enter password"
+                                   GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                   style="-fx-background-color: #f0f8ff; -fx-border-color: #4a90e2; -fx-border-radius: 3;"/>
+
+                    <!-- First Name -->
+                    <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="2"
+                           style="-fx-text-fill: #2c5aa0; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtFirstName"
+                               promptText="Enter first name"
+                               GridPane.rowIndex="0" GridPane.columnIndex="3"
+                               style="-fx-background-color: #f0f8ff; -fx-border-color: #4a90e2; -fx-border-radius: 3;"/>
+
+                    <!-- Last Name -->
+                    <Label text="Last Name:" GridPane.rowIndex="1" GridPane.columnIndex="2"
+                           style="-fx-text-fill: #2c5aa0; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtLastName"
+                               promptText="Enter last name"
+                               GridPane.rowIndex="1" GridPane.columnIndex="3"
+                               style="-fx-background-color: #f0f8ff; -fx-border-color: #4a90e2; -fx-border-radius: 3;"/>
+
+                    <!-- Marks -->
+                    <Label text="Marks:" GridPane.rowIndex="2" GridPane.columnIndex="2"
+                           style="-fx-text-fill: #2c5aa0; -fx-font-weight: bold;"/>
+                    <TextField fx:id="txtMarks"
+                               promptText="0 - 10"
+                               GridPane.rowIndex="2" GridPane.columnIndex="3"
+                               style="-fx-background-color: #f0f8ff; -fx-border-color: #4a90e2; -fx-border-radius: 3;"/>
+
+                </GridPane>
+
+            </TitledPane>
+
+            <!-- ================= BUTTONS ================= -->
+            <HBox spacing="20" alignment="CENTER_RIGHT">
+
+                <Button text="Add"
+                        fx:id="btnAdd"
+                        prefWidth="100"
+                        style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-cursor: hand;"
+                        onAction="#handleAddStudent"/>
+
+                <Button text="Update"
+                        fx:id="btnUpdate"
+                        prefWidth="100"
+                        style="-fx-background-color: #2c5aa0; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-cursor: hand;"
+                        onAction="#handleUpdateStudent"/>
+
+                <Button text="Delete"
+                        fx:id="btnDelete"
+                        prefWidth="100"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-cursor: hand;"
+                        onAction="#handleDeleteStudent"/>
+
+                <Button text="Clear"
+                        fx:id="btnClear"
+                        prefWidth="100"
+                        style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-cursor: hand;"
+                        onAction="#handleClearForm"/>
+
+            </HBox>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>
