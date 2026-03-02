@@ -1,0 +1,237 @@
+/* Theme chính với màu xanh biển và xám nhạt - phong cách cổ điển, sang trọng */
+
+:root {
+  --primary-blue: #2c5282;
+  --light-blue: #3182ce;
+  --medium-blue: #2b6cb0;
+  --dark-blue: #1a365d;
+  --light-gray: #f7fafc;
+  --medium-gray: #e2e8f0;
+  --dark-gray: #4a5568;
+  --accent-blue: #4299e1;
+  --white: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem;
+  background-color: var(--light-gray);
+  min-height: calc(100vh - 60px);
+}
+
+/* Navbar styling */
+.navbar-custom {
+  background: linear-gradient(135deg, var(--primary-blue), var(--medium-blue));
+  box-shadow: 0 2px 10px var(--shadow);
+  border-bottom: 3px solid var(--dark-blue);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: var(--white) !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: var(--accent-blue) !important;
+}
+
+.navbar-custom .navbar-toggler {
+  border-color: var(--white);
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Card styling */
+.card-custom {
+  background: var(--white);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.card-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.card-header-custom {
+  background: linear-gradient(135deg, var(--light-blue), var(--medium-blue));
+  color: var(--white);
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  border: none;
+}
+
+/* Button styling */
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary-blue), var(--medium-blue));
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(135deg, var(--medium-blue), var(--light-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px var(--shadow);
+  color: var(--white);
+}
+
+.btn-secondary-custom {
+  background: var(--medium-gray);
+  border: none;
+  border-radius: 8px;
+  color: var(--dark-gray);
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+  background: var(--dark-gray);
+  color: var(--white);
+}
+
+/* Form styling */
+.form-control-custom {
+  border: 2px solid var(--medium-gray);
+  border-radius: 8px;
+  padding: 0.75rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--white);
+}
+
+.form-control-custom:focus {
+  border-color: var(--light-blue);
+  box-shadow: 0 0 0 0.2rem rgba(66, 153, 225, 0.25);
+  outline: none;
+}
+
+.form-label-custom {
+  color: var(--dark-blue);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Table styling */
+.table-custom {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+.table-custom thead {
+  background: linear-gradient(135deg, var(--light-blue), var(--medium-blue));
+  color: var(--white);
+}
+
+.table-custom tbody tr:hover {
+  background-color: var(--light-gray);
+}
+
+/* Alert styling */
+.alert-custom {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+.alert-success-custom {
+  background-color: #c6f6d5;
+  color: #22543d;
+  border-left: 4px solid #38a169;
+}
+
+.alert-danger-custom {
+  background-color: #fed7d7;
+  color: #742a2a;
+  border-left: 4px solid #e53e3e;
+}
+
+/* Dashboard styling */
+.dashboard-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--shadow);
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--primary-blue);
+}
+
+.dashboard-title {
+  color: var(--primary-blue);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Loading spinner */
+.spinner-custom {
+  color: var(--primary-blue);
+}
+
+/* Animation cho transitions */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medium-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-gray);
+}
